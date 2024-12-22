@@ -16,14 +16,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         diameter = random.randint(10, 250)
         x = random.randint(0, self.width() - diameter)
         y = random.randint(0, self.height() - diameter)
-        self.circles.append((x, y, diameter))
+        r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+        self.circles.append((x, y, diameter, r, g, b))
         self.update()
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        painter.setBrush(QColor(255, 255, 0))  # Желтый цвет
         for circle in self.circles:
-            x, y, diameter = circle
+            x, y, diameter, r, g, b = circle
+            painter.setBrush(QColor(r, g, b))
             painter.drawEllipse(x, y, diameter, diameter)
 
 
